@@ -19,11 +19,7 @@ std::ostream& operator<<(std::ostream &os, GptHeader *header) {
     os << "firstUsableLba: " << header->firstUsableLba << std::endl;
     os << "lastUsableLba: " << header->lastUsableLba << std::endl;
 
-    os << "diskGuid: " ;
-    for (char i : header->diskGuid) {
-        printf("%hhx",i);
-    }
-    os << std::endl;
+    os << "diskGuid: " << header->diskGuid << std::endl;
 
     os << "First LBA of partition entry array: " << header->partitionEntryArrayLba << std::endl;
     os << "Partition entry count: " << header->partitionEntryCount << std::endl;

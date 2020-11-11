@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <sstream>
+#include "Uuid.hpp"
 
 class GptHeader {
 public:
@@ -38,7 +39,7 @@ private:
     uint64_t lastUsableLba;
 
     // 16 bytes
-    char diskGuid[16];
+    UUID diskGuid;
 
     // 8 bytes
     uint64_t partitionEntryArrayLba;
