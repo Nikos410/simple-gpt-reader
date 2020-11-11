@@ -37,8 +37,10 @@ int main (int argc, char* argv[]) {
 
     } else {
         std::cerr << "GPT Header not found. Is the disk partitioned using GPT?" << std::endl;
+        close(fd);
         return EXIT_FAILURE;
     }
 
+    close(fd);
     return EXIT_SUCCESS;
 }
