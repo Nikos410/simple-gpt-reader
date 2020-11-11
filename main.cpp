@@ -2,7 +2,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <algorithm>
-#include "GuidPartitionTableHeader.hpp"
+#include "GptHeader.hpp"
 
 const uint BLOCK_SIZE = 512;
 
@@ -29,7 +29,7 @@ int main (int argc, char* argv[]) {
 
     std::cout << bytesRead << " bytes read." << std::endl;
 
-    auto header = (GuidPartitionTableHeader*)buffer;
+    auto header = (GptHeader*)buffer;
     std::cout << std::endl << "### GPT Header ###" << std::endl;
     std::cout << "Signature: " << header->signature << std::endl;
 

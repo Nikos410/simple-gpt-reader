@@ -3,4 +3,4 @@ project(simple-gpt-reader)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(simple-gpt-reader main.cpp GuidPartitionTableHeader.hpp)
+add_executable(simple-gpt-reader main.cpp GptHeader.hpp)

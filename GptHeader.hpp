@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-class GuidPartitionTableHeader {
+class GptHeader {
 public:
 
     // 8 bytes
