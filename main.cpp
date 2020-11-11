@@ -51,9 +51,9 @@ int main (int argc, char* argv[]) {
     }
     std::cout << std::endl;
 
-    std::cout << "startingLbaOfArrayOfPartitionEntries: " << header->startingLbaOfArrayOfPartitionEntries << std::endl;
-    std::cout << "numberOfPartitionEntries: " << header->numberOfPartitionEntries << std::endl;
-    std::cout << "sizeOfASinglePartitionEntry: " << header->sizeOfASinglePartitionEntry << std::endl;
+    std::cout << "First LBA of partition entry array: " << header->partitionEntryArrayLba << std::endl;
+    std::cout << "Partition entry count: " << header->partitionEntryCount << std::endl;
+    std::cout << "Partition entry size: " << header->partitionEntrySize << std::endl;
 
     return EXIT_SUCCESS;
 }
