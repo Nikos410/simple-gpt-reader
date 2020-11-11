@@ -1,7 +1,15 @@
+#ifndef SIMPLE_GPT_READER_GPT_HEADER_HPP
+#define SIMPLE_GPT_READER_GPT_HEADER_HPP
+
 #include <stdint.h>
+#include <sstream>
 
 class GptHeader {
 public:
+    bool isValid();
+    friend std::ostream& operator<<(std::ostream &os, GptHeader *header);
+
+private:
 
     // 8 bytes
     char signature[8];
@@ -45,3 +53,5 @@ public:
     // 4 bytes
     char partitionEntryArrayCrc32[4];
 };
+
+#endif // SIMPLE_GPT_READER_GPT_HEADER_HPP

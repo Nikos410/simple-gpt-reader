@@ -30,39 +30,15 @@ int main (int argc, char* argv[]) {
     std::cout << bytesRead << " bytes read." << std::endl;
 
     auto header = (GptHeader*)buffer;
-    if (std::string(header->signature) == "EFI PART") {
+    if (header->isValid()) {
         std::cout << "Found GPT Header:" << std::endl;
+        std::cout << "###################" << std::endl;
+        std::cout << header << std::endl;
+
     } else {
         std::cerr << "GPT Header not found. Is the disk partitioned using GPT?" << std::endl;
         return EXIT_FAILURE;
     }
 
-    std::cout << "###################" << std::endl;
-    std::cout << "Signature: " << header->signature << std::endl;
-
-    std::cout << "Revision: " ;
-    for (char i : header->revision) {
-        std::cout << (int)i << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Header size: " << header->headerSize << std::endl;
-    std::cout << "Current LBA: " << header->currentLba << std::endl;
-    std::cout << "Backup LBA: " << header->backupLba << std::endl;
-    std::cout << "firstUsableLba: " << header->firstUsableLba << std::endl;
-    std::cout << "lastUsableLba: " << header->lastUsableLba << std::endl;
-
-    std::cout << "diskGuid: " ;
-    for (char i : header->diskGuid) {
-        printf("%hhx",i);
-    }
-    std::cout << std::endl;
-
-    std::cout << "First LBA of partition entry array: " << header->partitionEntryArrayLba << std::endl;
-    std::cout << "Partition entry count: " << header->partitionEntryCount << std::endl;
-    std::cout << "Partition entry size: " << header->partitionEntrySize << std::endl;
-
     return EXIT_SUCCESS;
 }
-
-
