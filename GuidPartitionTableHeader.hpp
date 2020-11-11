@@ -1,6 +1,8 @@
 #include <stdint.h>
 
-struct GuidPartitionTableHeader {
+class GuidPartitionTableHeader {
+public:
+
     // 8 bytes
     char signature[8];
 
