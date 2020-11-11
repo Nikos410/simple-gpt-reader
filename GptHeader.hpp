@@ -1,7 +1,7 @@
 #ifndef SIMPLE_GPT_READER_GPT_HEADER_HPP
 #define SIMPLE_GPT_READER_GPT_HEADER_HPP
 
-#include <stdint.h>
+#include <cstdint>
 #include <sstream>
 
 class GptHeader {
@@ -10,7 +10,6 @@ public:
     friend std::ostream& operator<<(std::ostream &os, GptHeader *header);
 
 private:
-
     // 8 bytes
     char signature[8];
 
