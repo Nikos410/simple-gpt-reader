@@ -30,7 +30,14 @@ int main (int argc, char* argv[]) {
     std::cout << bytesRead << " bytes read." << std::endl;
 
     auto header = (GptHeader*)buffer;
-    std::cout << std::endl << "### GPT Header ###" << std::endl;
+    if (std::string(header->signature) == "EFI PART") {
+        std::cout << "Found GPT Header:" << std::endl;
+    } else {
+        std::cerr << "GPT Header not found. Is the disk partitioned using GPT?" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    std::cout << "###################" << std::endl;
     std::cout << "Signature: " << header->signature << std::endl;
 
     std::cout << "Revision: " ;
