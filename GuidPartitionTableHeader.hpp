@@ -13,7 +13,7 @@ public:
     uint32_t headerSize;
 
     // 4 bytes
-    char crc32OfHeader[4];
+    char headerCrc32[4];
 
     // 4 bytes
     char reserved[4];
@@ -34,14 +34,14 @@ public:
     char diskGuid[16];
 
     // 8 bytes
-    uint64_t startingLbaOfArrayOfPartitionEntries;
+    uint64_t partitionEntryArrayLba;
 
     // 4 bytes
-    uint32_t numberOfPartitionEntries;
+    uint32_t partitionEntryCount;
 
     // 4 bytes
-    uint32_t sizeOfASinglePartitionEntry;
+    uint32_t partitionEntrySize;
 
     // 4 bytes
-    char crc32OfPartitionEntryArray[4];
+    char partitionEntryArrayCrc32[4];
 };
