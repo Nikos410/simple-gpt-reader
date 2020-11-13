@@ -1,7 +1,7 @@
 #include <iostream>
-#include <fcntl.h>
-#include <unistd.h>
 #include <algorithm>
+#include <fstream>
+#include <vector>
 #include "GptHeader.hpp"
 
 const uint BLOCK_SIZE = 512;
@@ -11,36 +11,31 @@ int main (int argc, char* argv[]) {
         std::cerr << "Please specify device" << std::endl;
         return EXIT_FAILURE;
     }
-
     char* device = argv[1];
-    int fd = open(device, O_RDONLY | O_NONBLOCK);
-    if (fd < 0) {
-        std::cerr << "Could not open block device " << device << std::endl;
+
+    std::cout << "Opening " << device << std::endl;
+    std::ifstream deviceInputStream = std::ifstream(device, std::ios::binary | std::ios::in);
+
+    // We want to read the second block (after the gpt header)
+    deviceInputStream.seekg(BLOCK_SIZE);
+
+    std::vector<char> buffer = std::vector<char>(sizeof(GptHeader));
+    if (deviceInputStream.read(buffer.data(), sizeof(GptHeader))) {
+        deviceInputStream.close();
+    } else {
+        std::cerr << "Could not read data into buffer." << std::endl;
         return EXIT_FAILURE;
     }
 
-    // We want to read the second block (after the gpt header)
-    lseek(fd, BLOCK_SIZE, SEEK_SET);
-
-    char buffer[BLOCK_SIZE];
-    int bytesRead = read(fd, buffer, BLOCK_SIZE);
-
-    close(fd);
-
-    std::cout << bytesRead << " bytes read." << std::endl;
-
-    auto header = (GptHeader*)buffer;
+    auto header = (GptHeader*)buffer.data();
     if (header->isValid()) {
         std::cout << "Found GPT Header:" << std::endl;
         std::cout << "###################" << std::endl;
         std::cout << header << std::endl;
-
     } else {
         std::cerr << "GPT Header not found. Is the disk partitioned using GPT?" << std::endl;
-        close(fd);
         return EXIT_FAILURE;
     }
 
-    close(fd);
     return EXIT_SUCCESS;
 }
