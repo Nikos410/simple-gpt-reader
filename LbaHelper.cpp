@@ -2,9 +2,14 @@
 #include <iostream>
 
 LbaHelper::LbaHelper(std::string &devicePath, uint blockSize) {
+    this->blockSize = blockSize;
+
     std::cout << "Opening " << devicePath << std::endl;
     deviceInputStream = std::ifstream(devicePath, std::ios::binary | std::ios::in);
-    this->blockSize = blockSize;
+    if (!deviceInputStream.is_open()) {
+        std::cerr << "Could not open " << devicePath << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 LbaHelper::~LbaHelper() {
