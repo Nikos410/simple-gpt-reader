@@ -4,7 +4,6 @@
 #include "LbaHelper.hpp"
 
 std::string devicePathFromArgs(int argc, char* argv[]);
-void printGptHeader(LbaHelper& lbaHelper);
 GptHeader findGptHeader(LbaHelper& lbaHelper);
 
 const uint BLOCK_SIZE = 512;
@@ -13,7 +12,8 @@ int main (int argc, char* argv[]) {
     std::string devicePath = devicePathFromArgs(argc, argv);
     auto lbaHelper = LbaHelper(devicePath, BLOCK_SIZE);
 
-    printGptHeader(lbaHelper);
+    auto GptHeader = findGptHeader(lbaHelper);
+    // TODO: read partition entries
 
     return EXIT_SUCCESS;
 }
@@ -27,17 +27,14 @@ std::string devicePathFromArgs(int argc, char* argv[]) {
     return argv[1];
 }
 
-void printGptHeader(LbaHelper& lbaHelper) {
-    auto header = findGptHeader(lbaHelper);
+GptHeader findGptHeader(LbaHelper& lbaHelper) {
+    auto header = lbaHelper.read<GptHeader>(1);
     if (header.isValid()) {
         std::cout << std::endl << "#### Found GPT Header ####" << std::endl;
         std::cout << header << std::endl << std::endl;
+        return header;
     } else {
         std::cerr << "GPT Header not found. Is the disk partitioned using GPT?" << std::endl;
         exit (EXIT_FAILURE);
     }
-}
-
-GptHeader findGptHeader(LbaHelper& lbaHelper) {
-    return lbaHelper.read<GptHeader>(1);
 }
