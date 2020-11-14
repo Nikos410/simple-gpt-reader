@@ -8,7 +8,7 @@
 class GptHeader {
 public:
     bool isValid();
-    friend std::ostream& operator<<(std::ostream &os, GptHeader *header);
+    friend std::ostream& operator<<(std::ostream &os, GptHeader &header);
 
 private:
     // 8 bytes
