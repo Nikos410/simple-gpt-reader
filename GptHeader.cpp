@@ -14,16 +14,16 @@ std::ostream& operator<<(std::ostream &os, GptHeader &header) {
     os << std::endl;
 
     os << "Header size: " << header.headerSize << std::endl;
-    os << "Current LBA: " << header.currentLba << std::endl;
-    os << "Backup LBA: " << header.backupLba << std::endl;
+    os << "Current LBA: " << header.myLba << std::endl;
+    os << "Backup LBA: " << header.alternateLba << std::endl;
     os << "firstUsableLba: " << header.firstUsableLba << std::endl;
     os << "lastUsableLba: " << header.lastUsableLba << std::endl;
 
     os << "diskGuid: " << header.diskGuid << std::endl;
 
-    os << "First LBA of partition entry array: " << header.partitionEntryArrayLba << std::endl;
-    os << "Partition entry count: " << header.partitionEntryCount << std::endl;
-    os << "Partition entry size: " << header.partitionEntrySize;
+    os << "First LBA of partition entry array: " << header.partitionEntryLba << std::endl;
+    os << "Partition entry count: " << header.numberOfPartitionEntries << std::endl;
+    os << "Partition entry size: " << header.sizeOfPartitionEntry;
 
     return os;
 }

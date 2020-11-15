@@ -5,6 +5,9 @@
 #include <sstream>
 #include "Uuid.hpp"
 
+/**
+ * Based on https://uefi.org/sites/default/files/resources/UEFI%20Spec%202.8B%20May%202020.pdf
+ */
 class GptHeader {
 public:
     bool isValid();
@@ -27,10 +30,10 @@ private:
     char reserved[4];
 
     // 8 bytes
-    uint64_t currentLba;
+    uint64_t myLba;
 
     // 8 bytes
-    uint64_t backupLba;
+    uint64_t alternateLba;
 
     // 8 bytes
     uint64_t firstUsableLba;
@@ -42,13 +45,13 @@ private:
     UUID diskGuid;
 
     // 8 bytes
-    uint64_t partitionEntryArrayLba;
+    uint64_t partitionEntryLba;
 
     // 4 bytes
-    uint32_t partitionEntryCount;
+    uint32_t numberOfPartitionEntries;
 
     // 4 bytes
-    uint32_t partitionEntrySize;
+    uint32_t sizeOfPartitionEntry;
 
     // 4 bytes
     char partitionEntryArrayCrc32[4];
