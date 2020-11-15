@@ -4,7 +4,7 @@ bool GptHeader::isValid() {
     return std::string(this->signature) == "EFI PART";
 }
 
-std::ostream& operator<<(std::ostream &os, GptHeader &header) {
+std::ostream &operator<<(std::ostream &os, GptHeader &header) {
     os << "Signature: " << header.signature << std::endl;
 
     os << "Revision: " ;

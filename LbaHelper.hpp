@@ -24,11 +24,6 @@ public:
     }
 
     template<typename T> T readFromCurrentPosition(size_t size) {
-        if (sizeof(T) < size) {
-            std::cerr << "Number of bytes must be >= type" << std::endl;
-            exit(EXIT_FAILURE);
-        }
-
         char buffer[size];
         if (deviceInputStream.read(buffer, size)) {
             return *(T*) &buffer;

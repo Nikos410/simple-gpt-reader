@@ -10,6 +10,8 @@
 class UUID {
 public:
     std::string format();
+    bool operator==(UUID &other) const;
+    bool operator!=(UUID &other) const;
 private:
     std::string formatNode();
 

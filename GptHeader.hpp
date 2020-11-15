@@ -53,7 +53,8 @@ public:
     char partitionEntryArrayCrc32[4];
 
     bool isValid();
-    friend std::ostream& operator<<(std::ostream &os, GptHeader &header);
 };
+
+std::ostream& operator<<(std::ostream &os, GptHeader &header);
 
 #endif // SIMPLE_GPT_READER_GPT_HEADER_HPP
