@@ -16,4 +16,6 @@ public:
     bool isUsed();
 };
 
+std::ostream& operator<<(std::ostream &os, GptPartitionEntry &entry);
+
 #endif //SIMPLE_GPT_READER_GPTPARTITIONENTRY_HPP

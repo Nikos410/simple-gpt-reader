@@ -31,7 +31,8 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < header.numberOfPartitionEntries; i++) {
         GptPartitionEntry currentEntry = partitionEntries[i];
         if (currentEntry.isUsed()) {
-            std::cout << "Partition " << i << " is used." << std::endl;
+            std::cout << "# Partition " << i << ":" << std::endl;
+            std::cout << currentEntry << std::endl << std::endl;
         }
 
     }
@@ -52,7 +53,8 @@ GptHeader findGptHeader(LbaHelper &lbaHelper) {
     auto header = lbaHelper.readFromLba<GptHeader>(1);
     if (header.isValid()) {
         std::cout << std::endl << "#### Found GPT Header ####" << std::endl;
-        std::cout << header << std::endl << std::endl;
+        std::cout << header << std::endl;
+        std::cout << "#### End of GPT Header ####" << std::endl << std::endl;
         return header;
     } else {
         std::cerr << "GPT Header not found. Is the disk partitioned using GPT?" << std::endl;
