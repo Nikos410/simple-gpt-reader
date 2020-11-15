@@ -10,10 +10,6 @@
  */
 class GptHeader {
 public:
-    bool isValid();
-    friend std::ostream& operator<<(std::ostream &os, GptHeader &header);
-
-private:
     // 8 bytes
     char signature[8];
 
@@ -55,6 +51,9 @@ private:
 
     // 4 bytes
     char partitionEntryArrayCrc32[4];
+
+    bool isValid();
+    friend std::ostream& operator<<(std::ostream &os, GptHeader &header);
 };
 
 #endif // SIMPLE_GPT_READER_GPT_HEADER_HPP
