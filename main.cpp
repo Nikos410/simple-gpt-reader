@@ -6,14 +6,14 @@
 std::string devicePathFromArgs(int argc, char* argv[]);
 GptHeader findGptHeader(LbaHelper& lbaHelper);
 
-const uint BLOCK_SIZE = 512;
+const size_t BLOCK_SIZE = 512;
 
 int main (int argc, char* argv[]) {
     std::string devicePath = devicePathFromArgs(argc, argv);
     auto lbaHelper = LbaHelper(devicePath, BLOCK_SIZE);
 
     auto GptHeader = findGptHeader(lbaHelper);
-    // TODO: read partition entries
+    // TODO: readFromLba partition entries
 
     return EXIT_SUCCESS;
 }
@@ -28,7 +28,7 @@ std::string devicePathFromArgs(int argc, char* argv[]) {
 }
 
 GptHeader findGptHeader(LbaHelper& lbaHelper) {
-    auto header = lbaHelper.read<GptHeader>(1);
+    auto header = lbaHelper.readFromLba<GptHeader>(1);
     if (header.isValid()) {
         std::cout << std::endl << "#### Found GPT Header ####" << std::endl;
         std::cout << header << std::endl << std::endl;

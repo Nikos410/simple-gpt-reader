@@ -6,7 +6,9 @@ LbaHelper::LbaHelper(std::string &devicePath, uint blockSize) {
 
     std::cout << "Opening " << devicePath << std::endl;
     deviceInputStream = std::ifstream(devicePath, std::ios::binary | std::ios::in);
-    if (!deviceInputStream.is_open()) {
+    if (deviceInputStream.is_open()) {
+        deviceInputStream.seekg(0);
+    } else {
         std::cerr << "Could not open " << devicePath << std::endl;
         exit(EXIT_FAILURE);
     }
