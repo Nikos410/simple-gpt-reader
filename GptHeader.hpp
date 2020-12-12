@@ -10,49 +10,24 @@
  */
 class GptHeader {
 public:
-    // 8 bytes
-    char signature[8];
-
-    // 4 bytes
-    char revision[4];
-
-    // 4 bytes
+    uint64_t signature;
+    // Revision consists of 4 digits
+    uint8_t revision[4];
     uint32_t headerSize;
-
-    // 4 bytes
-    char headerCrc32[4];
-
-    // 4 bytes
-    char reserved[4];
-
-    // 8 bytes
+    uint32_t headerCrc32;
+    uint32_t reserved;
     uint64_t myLba;
-
-    // 8 bytes
     uint64_t alternateLba;
-
-    // 8 bytes
     uint64_t firstUsableLba;
-
-    // 8 bytes
     uint64_t lastUsableLba;
-
     // 16 bytes
     UUID diskGuid;
-
-    // 8 bytes
     uint64_t partitionEntryLba;
-
-    // 4 bytes
     uint32_t numberOfPartitionEntries;
-
-    // 4 bytes
     uint32_t sizeOfPartitionEntry;
+    uint32_t partitionEntryArrayCrc32;
 
-    // 4 bytes
-    char partitionEntryArrayCrc32[4];
-
-    bool isValid();
+    bool isValid() const;
 };
 
 std::ostream& operator<<(std::ostream &os, GptHeader &header);

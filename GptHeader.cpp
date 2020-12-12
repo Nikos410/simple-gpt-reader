@@ -1,11 +1,14 @@
 #include "GptHeader.hpp"
 
-bool GptHeader::isValid() {
-    return std::string(this->signature) == "EFI PART";
+// "EFI PART"
+const uint64_t GPT_HEADER_SIGNATURE = 0x5452415020494645;
+
+bool GptHeader::isValid() const {
+    return this->signature == GPT_HEADER_SIGNATURE;
 }
 
 std::ostream &operator<<(std::ostream &os, GptHeader &header) {
-    os << "Signature: " << header.signature << std::endl;
+    os << "Signature: 0x" << std::hex << header.signature << std::dec << std::endl;
 
     os << "Revision: " ;
     for (char i : header.revision) {
