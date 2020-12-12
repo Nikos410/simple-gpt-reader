@@ -4,6 +4,9 @@
 #include <cstdint>
 #include "Uuid.hpp"
 
+/**
+ * Based on https://uefi.org/sites/default/files/resources/UEFI%20Spec%202.8B%20May%202020.pdf
+ */
 class GptPartitionEntry {
 public:
     UUID partitionTypeGuid;
